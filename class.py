@@ -5,3 +5,6 @@ class data_user:
 
     def info(self):
         return f'{self.nama},{self.password}'
+class data_ruangan:
+    def __init__(self,nama_ruangan,kode_ruangan):
+        self.nama_ruangan = nama_ruangan

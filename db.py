@@ -1,0 +1,26 @@
+import mysql.connector as mysql_conn
+
+class database:
+    def __init__(self):
+        self.dbgw = mysql_conn.connect(
+            host = 'localhost',
+            user = 'root',
+            password = '',
+            database = ''
+        )
+        self.cur = self.dbgw.cursor()
+
+    def execute (self,sql,val):
+        self.cur.execute(sql,val)
+        self.dbgw.commit()
+        return self.cur.rowcount
+    
+    def delete (self,sql):
+        self.cur.execute(sql)
+        self.dbgw.commit()
+        return self.cur.rowcount
+    
+    def fetch (self,sql):
+        self.cur.execute(sql)
+        hasil = self.cur.fetchall()
+        return hasil

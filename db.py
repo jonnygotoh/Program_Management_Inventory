@@ -6,7 +6,7 @@ class database:
             host = 'localhost',
             user = 'root',
             password = '',
-            database = ''
+            database = 'db_go'
         )
         self.cur = self.dbgw.cursor()
 

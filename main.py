@@ -1,3 +1,4 @@
 from db import database
 
-data = database
+db =database()
+

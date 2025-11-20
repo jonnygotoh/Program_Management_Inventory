@@ -20,7 +20,7 @@ class database:
         self.dbgw.commit()
         return self.cur.rowcount
     
-    def fetch (self,sql):
-        self.cur.execute(sql)
+    def fetch (self,sql,val):
+        self.cur.execute(sql,val)
         hasil = self.cur.fetchall()
         return hasil

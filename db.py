@@ -15,8 +15,8 @@ class database:
         self.dbgw.commit()
         return self.cur.rowcount
     
-    def delete (self,sql):
-        self.cur.execute(sql)
+    def delete (self,sql,val):
+        self.cur.execute(sql,val)
         self.dbgw.commit()
         return self.cur.rowcount
     

@@ -1,0 +1,25 @@
+CREATE TABLE data_inventory (
+  id_barang INT AUTO_INCREMENT PRIMARY KEY,
+  nama_barang VARCHAR(40) NOT NULL,
+  kode_barang VARCHAR(60) NOT NULL,
+  status_barang VARCHAR(50) NOT NULL
+);
+
+CREATE TABLE data_kategori (
+  kode_barang VARCHAR(80) NOT NULL,
+  nama_barang VARCHAR(100) NOT NULL,
+  merek_barang VARCHAR(89) NOT NULL
+);
+
+CREATE TABLE data_ruangan (
+  kode_ruangan VARCHAR(70) NOT NULL,
+  nama_ruangan VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE data_user (
+  Username VARCHAR(40) NOT NULL,
+  Nama VARCHAR(100) NOT NULL,
+  Password VARCHAR(90) NOT NULL
+);
+
+COMMIT;

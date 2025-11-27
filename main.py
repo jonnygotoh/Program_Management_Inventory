@@ -1,6 +1,7 @@
-from db import database
+from db_conn.db import database
 
 db = database()
+# Membuat CRUD (Create, Read, Update, Delete dan juga fetch/menampilkan barang)
 
 def tambah_barang(kode, nama, status):
     sql = "INSERT INTO data_inventory (kode_barang, nama_barang, status_barang) VALUES (%s, %s, %s)"
@@ -17,6 +18,6 @@ def hapus_barang(id):
     val = (id,)
     return db.delete(sql, val)
 
-def semua_barang():
+def tampilkan_barang():
     sql = "SELECT * FROM data_inventory"
     return db.fetch(sql)

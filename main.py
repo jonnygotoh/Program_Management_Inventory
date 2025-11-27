@@ -21,3 +21,25 @@ def hapus_barang(id):
 def tampilkan_barang():
     sql = "SELECT * FROM data_inventory"
     return db.fetch(sql)
+
+from db_conn.db import database
+
+class Login:
+    def __init__(self):
+        self.db = database()
+        self.user_name = None   
+
+    def login_user(self, username, password):
+        sql = "SELECT username FROM data_user WHERE username=%s AND pw=%s"
+        val = (username, password)
+        result = self.db.fetch(sql, val)
+
+        if result:  
+            self.user_name = result[0][0]  
+            return True
+        
+        return False
+
+    def logout(self):
+        self.user_name = None
+

@@ -8,7 +8,7 @@ import mahasiswa as mhs
 
 current_session = sess.Session()
 
-class MainApp :
+class Main :
 	def __init__(self, root) :
 		self.root = root
 		self.login_page()

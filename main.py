@@ -42,4 +42,3 @@ class Login:
 
     def logout(self):
         self.user_name = None
-

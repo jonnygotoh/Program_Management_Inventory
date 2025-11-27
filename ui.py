@@ -2,17 +2,16 @@ from tkinter import *
 from tkinter import ttk
 from tkinter import messagebox
 
-import session as sess
-import mahasiswa as mhs
+import db_conn.db as data
+import main as mn
 
 
-current_session = sess.Session()
+current_session = mn.Login()
 
 class Main :
 	def __init__(self, root) :
 		self.root = root
 		self.login_page()
-
 
 	def login_process(self) :
 		username = self.entry_username.get()
@@ -63,6 +62,8 @@ class Main :
 
 		ttk.Button(top_frame, text="Logout", command=self.logout).pack(side="right", padx=10)
 
+		
+
 		self.table = ttk.Treeview(self.root, columns=("No", "Npm", "Nama", "Prodi", "Edit", "Delete"), show="headings")
 		self.table.heading("No", text="No")
 		self.table.heading("Npm", text="Npm")
@@ -87,7 +88,7 @@ class Main :
 		for row in self.table.get_children():
 			self.table.delete(row)
 
-		all_mahasiswa = mhs.get_all_mahasiswa()
+		all_mahasiswa = data.get_all_mahasiswa()
 		i = 1
 		for mahasiswa in all_mahasiswa:
 			self.table.insert("", END, values=(i, mahasiswa.npm_mahasiswa, mahasiswa.nama_mahasiswa, mahasiswa.nama_prodi, "Edit", "Delete"))
@@ -125,5 +126,5 @@ class Main :
 # ---------- RUN APP ----------
 if __name__ == "__main__":
 	root = Tk()
-	app = MainApp(root)
+	app = Main(root)
 	root.mainloop()

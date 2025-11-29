@@ -16,17 +16,12 @@ class database:
         self.dbgw.commit()
         return self.cur.rowcount
     
-    def delete (self,sql,val):
-        self.cur.execute(sql,val)
-        self.dbgw.commit()
-        return self.cur.rowcount
-    
     def fetch (self,sql,val):
         self.cur.execute(sql,val)
         hasil = self.cur.fetchall()
         return hasil
     
-    def menhubungkan_sql(self, filename="schema.sql"):
+    def menhubungkan_sql(self, filename='schema.sql'):
         # agar python tw dimana file scheme.sql berada
         # juga untuk buat path yang sama untuk file db sama schema
         filepath = os.path.join(os.path.dirname(__file__), filename)
@@ -42,4 +37,6 @@ class database:
             # if stmt itu untuk menghindari baris kosong
             if stmt:  
                 self.cur.execute(stmt)
-        self.dbgw.commit() 
+        self.dbgw.commit()
+
+data = database()

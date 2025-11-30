@@ -2,7 +2,7 @@ from tkinter import *
 from tkinter import ttk
 from tkinter import messagebox
 
-import db_conn.db as database
+import db_conn.db as datab
 import system as sys
 
 
@@ -27,7 +27,12 @@ class Main :
 			else :
 				messagebox.showerror("Failed", "Invalid username or password")
 		else :
-			messagebox.showerror("Failed", "Invalid username or password")
+			messagebox.showerror("Failed", "The textbox is empty please login or register first")
+
+	def regis_process(self) :
+		print ('helo world')
+
+		# if username = True and pass = True :
 
 	def login_page(self) :
 		self.clear_window()
@@ -44,7 +49,8 @@ class Main :
 		self.entry_password.pack()
 
 		ttk.Button(self.root, text="Login", command=self.login_process).pack(pady=15)
-
+		ttk.Button(self.root, text="Register", command=self.regis_process).pack(pady=15)
+		
 	def open_main_window(self):
 		self.clear_window()
 
@@ -55,7 +61,7 @@ class Main :
 		top_frame.pack(fill="x", pady=5)
 
 		ttk.Label(top_frame,
-		          text=f"Logged in as: {current_session.user_name}",
+		          text=f'Manajemen Inventory',background= 'black',foreground='White',
 		          font=("Arial", 12)).pack(side="left", padx=10)
 
 		ttk.Button(top_frame, text="Add New User", command=self.add_user_window).pack(side="right", padx=10)

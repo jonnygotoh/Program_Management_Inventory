@@ -1,6 +1,6 @@
 from db_conn.db import data
 
-db = data()
+db = data
 # Membuat CRUD (Create, Read, Update, Delete dan juga fetch/menampilkan barang)
 
 def tambah_barang(kode, nama, status):
@@ -24,7 +24,7 @@ def tampilkan_barang():
 
 class Login:
     def __init__(self):
-        self.db = data()
+        self.db = db()
         self.user_name = None   
 
     def login_user(self, username, password):

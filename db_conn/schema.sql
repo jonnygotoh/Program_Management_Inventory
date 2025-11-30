@@ -1,7 +1,7 @@
 CREATE TABLE `data_user` (
   `id` int NOT NULL,
   `username` varchar(250) DEFAULT NULL,
-  `pw` varchar(250) DEFAULT NULL,
+  `password` varchar(250) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 

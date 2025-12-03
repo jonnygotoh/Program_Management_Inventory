@@ -81,7 +81,22 @@ class Main :
 	def barang_gudang(self):
 		self.clear_window()
 
-		
+		self.table = ttk.Treeview(self.root, columns=('id_barang','kode_barang','nama_barang','status_barang',),show="headings")
+		self.table.heading("id_barang",text="id barang")
+		self.table.heading("kode_barang",text="kode barang")
+		self.table.heading("nama_barang",text="nama barang")
+		self.table.heading("status_barang",text="status barang")
+		self.table.heading("Edit",text="Edit")
+		self.table.heading("Delete",text="Delete")
+
+		self.table.column("id_barang",width=60)
+		self.table.column("kode_barang",width=60, anchor="center")
+		self.table.column("nama_barang",width=120, anchor="center")
+		self.table.column("status_barang",width=60, anchor="center")
+		self.table.column("Edit",width=40, anchor="center")
+		self.table.column("Delete",width=40, anchor="center")
+
+
 
 	# 	self.table = ttk.Treeview(self.root, columns=('id','nama','status',), show="headings")
 	# 	self.table.heading("No", text="No")

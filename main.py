@@ -5,13 +5,28 @@ from tkinter import messagebox
 import db_conn.db as datab
 import system as sys
 
-
 current_session = sys.Login()
 
 class Main :
 	def __init__(self, root) :
 		self.root = root
 		self.login_page()
+		
+	def login_page(self) :
+		self.clear_window()
+
+		self.root.title("Login Page")
+		self.root.geometry("450x270")
+
+		ttk.Label(self.root, text="Username:").pack(pady=5)
+		self.entry_username = ttk.Entry(self.root)
+		self.entry_username.pack()
+
+		ttk.Label(self.root, text="Password:").pack(pady=5)
+		self.entry_password = ttk.Entry(self.root, show="*")
+		self.entry_password.pack()
+
+		ttk.Button(self.root, text="Login", command=self.login_process).pack(pady=15)
 
 	def login_process(self) :
 		username = self.entry_username.get()
@@ -28,28 +43,6 @@ class Main :
 				messagebox.showerror("Failed", "Invalid username or password")
 		else :
 			messagebox.showerror("Failed", "The textbox is empty please login or register first")
-
-	def regis_process(self) :
-		print ('helo world')
-
-		# if username = True and pass = True :
-
-	def login_page(self) :
-		self.clear_window()
-
-		self.root.title("Login Page")
-		self.root.geometry("300x180")
-
-		ttk.Label(self.root, text="Username:").pack(pady=5)
-		self.entry_username = ttk.Entry(self.root)
-		self.entry_username.pack()
-
-		ttk.Label(self.root, text="Password:").pack(pady=5)
-		self.entry_password = ttk.Entry(self.root, show="*")
-		self.entry_password.pack()
-
-		ttk.Button(self.root, text="Login", command=self.login_process).pack(pady=15)
-		ttk.Button(self.root, text="Register", command=self.regis_process).pack(pady=15)
 		
 	def open_main_window(self):
 		self.clear_window()
@@ -57,18 +50,40 @@ class Main :
 		self.root.title("Dashboard")
 		self.root.geometry("650x350")
 
-		top_frame = ttk.Frame(self.root)
-		top_frame.pack(fill="x", pady=5)
+		style = ttk.Style()
+		style.theme_use('clam')
+		style.configure('1.TButton',foreground = 'white',background = 'black',padding = 5)
+		style.configure('2.TButton',foreground = 'white',background = '',padding = 5)
+		style.configure('Warna.TFrame', background = 'black')
+		style.configure('Side.TFrame')
+
+		top_frame = ttk.Frame(self.root, style = 'Warna.TFrame')
+		top_frame.pack(fill="x", pady=0,)
 
 		ttk.Label(top_frame,
 		          text=f'Manajemen Inventory',background= 'black',foreground='White',
-		          font=("Arial", 12)).pack(side="left", padx=10)
+		          font=("times new roman", 30, 'bold')).pack(side="left", padx=10)
 
-		ttk.Button(top_frame, text="Add New User", command=self.add_user_window).pack(side="right", padx=10)
+		ttk.Button(top_frame, text="Logout",style= '1.TButton', command=self.logout).pack(side="right", padx=10)
+# ==================================================================================
+		sub_frame = ttk.Frame(self.root, style = 'Side.TFrame',width= '200')
+		sub_frame.pack(side= 'left', fill= 'y')
 
-		ttk.Button(top_frame, text="Logout", command=self.logout).pack(side="right", padx=10)
+		self.logo = PhotoImage(file='logo.png')
+		imageLabel = ttk.Label(sub_frame, image= self.logo)
+		imageLabel.pack()
 
-	# 	self.table = ttk.Treeview(self.root, columns=("No", "Npm", "Nama", "Prodi", "Edit", "Delete"), show="headings")
+		menu = ttk.Label (sub_frame, text= 'MENU', font= ('times new roman', 30 ,'bold'),background='green',anchor='center')
+		menu.pack(fill='x')
+
+		ttk.Button(sub_frame, text='Inventory',command=self.barang_gudang).pack(fill= 'x')
+
+	def barang_gudang(self):
+		self.clear_window()
+
+		
+
+	# 	self.table = ttk.Treeview(self.root, columns=('id','nama','status',), show="headings")
 	# 	self.table.heading("No", text="No")
 	# 	self.table.heading("Npm", text="Npm")
 	# 	self.table.heading("Nama", text="Nama")

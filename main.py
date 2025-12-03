@@ -53,7 +53,7 @@ class Main :
 		style = ttk.Style()
 		style.theme_use('clam')
 		style.configure('1.TButton',foreground = 'white',background = 'black',padding = 5)
-		style.configure('2.TButton',foreground = 'white',background = '',padding = 5)
+		style.configure('2.TButton',foreground = 'black',background = 'white',font = ('times new roman',25, 'bold'))
 		style.configure('Warna.TFrame', background = 'black')
 		style.configure('Side.TFrame')
 
@@ -76,27 +76,31 @@ class Main :
 		menu = ttk.Label (sub_frame, text= 'MENU', font= ('times new roman', 30 ,'bold'),background='green',anchor='center')
 		menu.pack(fill='x')
 
-		ttk.Button(sub_frame, text='Inventory',command=self.barang_gudang).pack(fill= 'x')
+		ttk.Button(sub_frame, text='Inventory',style = '2.TButton',command = self.barang_gudang).pack(fill= 'x')
+		ttk.Button(sub_frame, text='Ruangan', style='2.TButton',command = self.Ruangan).pack(fill = 'x')
+		ttk.Button(sub_frame, text='Tampilin Barang',style = '2.TButton',command = self.Tampilan).pack(fill = 'x')
 
 	def barang_gudang(self):
 		self.clear_window()
+		# self.root.geometry()
 
 		self.table = ttk.Treeview(self.root, columns=('id_barang','kode_barang','nama_barang','status_barang',),show="headings")
-		self.table.heading("id_barang",text="id barang")
-		self.table.heading("kode_barang",text="kode barang")
-		self.table.heading("nama_barang",text="nama barang")
-		self.table.heading("status_barang",text="status barang")
-		self.table.heading("Edit",text="Edit")
-		self.table.heading("Delete",text="Delete")
+		self.table.heading("id_barang",text="ID")
+		self.table.heading("kode_barang",text="CODE")
+		self.table.heading("nama_barang",text="NAMA")
+		self.table.heading("status_barang",text="STATUS")
 
 		self.table.column("id_barang",width=60)
 		self.table.column("kode_barang",width=60, anchor="center")
 		self.table.column("nama_barang",width=120, anchor="center")
 		self.table.column("status_barang",width=60, anchor="center")
-		self.table.column("Edit",width=40, anchor="center")
-		self.table.column("Delete",width=40, anchor="center")
+		
 
+	# def Ruangan(self):
+	# 	self.clear_window
 
+	# def Tampilan(self):
+	# 	self.clear_window
 
 	# 	self.table = ttk.Treeview(self.root, columns=('id','nama','status',), show="headings")
 	# 	self.table.heading("No", text="No")
@@ -113,10 +117,10 @@ class Main :
 	# 	self.table.column("Edit", width=100, anchor="center")
 	# 	self.table.column("Delete", width=100, anchor="center")
 
-	# 	self.table.pack(fill="both", expand=True)
-	# 	self.table.bind("<ButtonRelease-1>", self.on_table_click)
-	# 	self.load_table_data()
-
+		self.table.pack(fill="both", expand=True)
+		self.table.bind("<ButtonRelease-1>", self.on_table_click)
+		self.load_table_data()
+		
 
 	# def load_table_data(self):
 	# 	for row in self.table.get_children():

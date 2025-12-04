@@ -27,6 +27,25 @@ class Main :
 		self.entry_password.pack()
 
 		ttk.Button(self.root, text="Login", command=self.login_process).pack(pady=15)
+		ttk.Button(self.root, text="Register", command=self.regis_page).pack(pady=15)
+
+	def regis_page(self) :
+		self.clear_window()
+
+		self.root.title("Register Page")
+		self.root.geometry("450x270")
+
+		ttk.Label(self.root, text="Get Your Username Here").pack(pady=5)
+		
+		ttk.Label(self.root, text="New Username:").pack(pady=5)
+		self.entry_username = ttk.Entry(self.root)
+		self.entry_username.pack()
+
+		ttk.Label(self.root, text="Password:").pack(pady=5)
+		self.entry_password = ttk.Entry(self.root, show="*")
+		self.entry_password.pack()
+
+		ttk.Button(self.root, text="Register", command=self.regis_process).pack(pady=15)
 
 	def login_process(self) :
 		username = self.entry_username.get()
@@ -43,6 +62,8 @@ class Main :
 				messagebox.showerror("Failed", "Invalid username or password")
 		else :
 			messagebox.showerror("Failed", "The textbox is empty please login or register first")
+
+
 		
 	def open_main_window(self):
 		self.clear_window()
@@ -62,9 +83,9 @@ class Main :
 
 		ttk.Label(top_frame,
 		          text=f'Manajemen Inventory',background= 'black',foreground='White',
-		          font=("times new roman", 30, 'bold')).pack(side="left", padx=10)
+		          font=('times new roman', 30, 'bold')).pack(side="left", padx=10)
 
-		ttk.Button(top_frame, text="Logout",style= '1.TButton', command=self.logout).pack(side="right", padx=10)
+		ttk.Button(top_frame, text='Logout',style= '1.TButton', command=self.logout).pack(side="right", padx=10)
 # ==================================================================================
 		sub_frame = ttk.Frame(self.root, style = 'Side.TFrame',width= '200')
 		sub_frame.pack(side= 'left', fill= 'y')
@@ -78,11 +99,31 @@ class Main :
 
 		ttk.Button(sub_frame, text='Inventory',style = '2.TButton',command = self.barang_gudang).pack(fill= 'x')
 		ttk.Button(sub_frame, text='Ruangan', style='2.TButton',command = self.Ruangan).pack(fill = 'x')
-		ttk.Button(sub_frame, text='Tampilin Barang',style = '2.TButton',command = self.Tampilan).pack(fill = 'x')
+		ttk.Button(sub_frame, text='Kategori',style = '2.TButton',command = self.Kategori).pack(fill = 'x')
 
 	def barang_gudang(self):
 		self.clear_window()
-		# self.root.geometry()
+		self.root.title ('Gudang')
+
+		style = ttk.Style()
+		style.theme_use('clam')
+		style.configure('Warna.TFrame', background = 'black')
+		style.configure('1.TButton',foreground = 'white',background = 'black',padding = 5)
+
+		top_frame = ttk.Frame(self.root, style = 'Warna.TFrame')
+		top_frame.pack(fill='x', pady=0,)
+
+		crud_frame = ttk.Frame(self.root,style = 'Warna.TFrame')
+		crud_frame.pack(fill='x',side='bottom',pady=0)
+
+		ttk.Label(top_frame,
+		          text=f'Storage',background= 'black',foreground='White',
+		          font=('times new roman', 30, 'bold')).pack(side="left", padx=10)
+	
+		ttk.Button(top_frame, text="Back",style= '1.TButton', command=self.open_main_window).pack(side="right", padx=10)
+		ttk.Button(crud_frame, text='Add', style='1.TButton', command=self.tambah_barang).pack(side='left', padx=5)
+		ttk.Button(crud_frame,text='Edit',style='1.TButton',command=self.edit_barang).pack(side = 'left',padx=5)
+		ttk.Button(crud_frame, text='Delete', style='1.TButton', command=self.hapus_barang).pack(side='left', padx=5)
 
 		self.table = ttk.Treeview(self.root, columns=('id_barang','kode_barang','nama_barang','status_barang',),show="headings")
 		self.table.heading("id_barang",text="ID")
@@ -94,13 +135,18 @@ class Main :
 		self.table.column("kode_barang",width=60, anchor="center")
 		self.table.column("nama_barang",width=120, anchor="center")
 		self.table.column("status_barang",width=60, anchor="center")
-		
-		self.table.pack(fill="both", expand=True)
-		self.table.bind("<ButtonRelease-1>", self.on_table_click)
-		self.load_table_data()
+
+        
+	def tambah_barang(self):
+		self
+	def edit_barang(self):
+		self
+	def hapus_barang(self):
+		self
+	
 
 	def Ruangan(self):
-		self.clear_window
+		self.clear_window()
 
 		self.table = ttk.Treeview(self.root, columns=('kode_ruangan','nama_ruangan',),show="headings")
 		self.table.heading("kode_ruangan",text="Kode Ruangan")
@@ -109,57 +155,8 @@ class Main :
 		self.table.column("kode_ruangan",width=60)
 		self.table.column("nama_ruangan",width=60, anchor="center")
 
-	# def Tampilan(self):
-	# 	self.clear_window
-
-	# 	self.table = ttk.Treeview(self.root, columns=('id','nama','status',), show="headings")
-	# 	self.table.heading("No", text="No")
-	# 	self.table.heading("Npm", text="Npm")
-	# 	self.table.heading("Nama", text="Nama")
-	# 	self.table.heading("Prodi", text="Prodi")
-	# 	self.table.heading("Edit", text="Edit")
-	# 	self.table.heading("Delete", text="Delete")
-
-	# 	self.table.column("No", width=50)
-	# 	self.table.column("Npm", width=100, anchor="center")
-	# 	self.table.column("Nama", width=100, anchor="center")
-	# 	self.table.column("Prodi", width=100, anchor="center")
-	# 	self.table.column("Edit", width=100, anchor="center")
-	# 	self.table.column("Delete", width=100, anchor="center")
-
-		self.table.pack(fill="both", expand=True)
-		self.table.bind("<ButtonRelease-1>", self.on_table_click)
-		self.load_table_data()
-		
-
-	# def load_table_data(self):
-	# 	for row in self.table.get_children():
-	# 		self.table.delete(row)
-
-	# 	all_mahasiswa = data.get_all_mahasiswa()
-	# 	i = 1
-	# 	for mahasiswa in all_mahasiswa:
-	# 		self.table.insert("", END, values=(i, mahasiswa.npm_mahasiswa, mahasiswa.nama_mahasiswa, mahasiswa.nama_prodi, "Edit", "Delete"))
-	# 		i+= 1
-
-
-	# def add_user_window(self) :
-	# 	print("If possible coba dibuat disini")
-
-	# def on_table_click(self, event):
-	# 	item = self.table.identify_row(event.y)
-	# 	column = self.table.identify_column(event.x)
-
-	# 	if not item:
-	# 		return
-
-	# 	_,npm_mahasiswa,_, _, _, _ = self.table.item(item, "values")
-
-	# 	if column == "#5":  
-	# 		print(f"Edit {npm_mahasiswa}")
-	# 	elif column == "#6":
-	# 		print(f"Delete {npm_mahasiswa}")
-
+	def Kategori(self):
+		self.clear_window
 
 	def logout(self):
 		current_session.logout()
@@ -170,6 +167,17 @@ class Main :
 		for widget in self.root.winfo_children():
 			widget.destroy()
 
+		# def load_table_data(self):
+	# 	for item in self.table.get_children():
+	# 		self.table.delete(row)
+
+	# 	data_barang = sys.tampilkan_barang()
+    # 	for row in data_barang:
+    #     	self.tree.insert("", "end", values=row)
+
+	# self.table.pack(fill="both", expand=True)
+		# self.table.bind("<ButtonRelease-1>", self.on_table_click)
+		# self.load_table_data()
 
 # ---------- RUN APP ----------
 if __name__ == "__main__":

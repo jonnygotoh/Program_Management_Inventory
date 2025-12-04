@@ -96,11 +96,20 @@ class Main :
 		self.table.column("status_barang",width=60, anchor="center")
 		
 
-	# def Ruangan(self):
-	# 	self.clear_window
+	def Ruangan(self):
+		self.clear_window
 
-	# def Tampilan(self):
-	# 	self.clear_window
+		self.table = ttk.Treeview(self.root, columns=('kode_ruangan','nama_ruangan',),show="headings")
+		self.table.heading("kode_ruangan",text="Kode Ruangan")
+		self.table.heading("nama_barang",text="Nama Ruangan")
+
+		self.table.column("kode_ruangan",width=60)
+		self.table.column("nama_ruangan",width=60, anchor="center")
+
+	def Tampilan(self):
+		self.clear_window
+
+
 
 	# 	self.table = ttk.Treeview(self.root, columns=('id','nama','status',), show="headings")
 	# 	self.table.heading("No", text="No")

@@ -95,6 +95,9 @@ class Main :
 		self.table.column("nama_barang",width=120, anchor="center")
 		self.table.column("status_barang",width=60, anchor="center")
 		
+		self.table.pack(fill="both", expand=True)
+		self.table.bind("<ButtonRelease-1>", self.on_table_click)
+		self.load_table_data()
 
 	def Ruangan(self):
 		self.clear_window
@@ -106,10 +109,8 @@ class Main :
 		self.table.column("kode_ruangan",width=60)
 		self.table.column("nama_ruangan",width=60, anchor="center")
 
-	def Tampilan(self):
-		self.clear_window
-
-
+	# def Tampilan(self):
+	# 	self.clear_window
 
 	# 	self.table = ttk.Treeview(self.root, columns=('id','nama','status',), show="headings")
 	# 	self.table.heading("No", text="No")

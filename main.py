@@ -47,6 +47,24 @@ class Main :
 
 		ttk.Button(self.root, text="Register", command=self.regis_process).pack(pady=15)
 
+	def regis_page(self) :
+		self.clear_window()
+
+		self.root.title("Register Page")
+		self.root.geometry("450x270")
+
+		ttk.Label(self.root, text="Get Your Username Here").pack(pady=5)
+		
+		ttk.Label(self.root, text="New Username:").pack(pady=5)
+		self.entry_username = ttk.Entry(self.root)
+		self.entry_username.pack()
+
+		ttk.Label(self.root, text="Password:").pack(pady=5)
+		self.entry_password = ttk.Entry(self.root, show="*")
+		self.entry_password.pack()
+
+		ttk.Button(self.root, text="Register", command=self.regis_process).pack(pady=15)
+
 	def login_process(self) :
 		username = self.entry_username.get()
 		password = self.entry_password.get()
@@ -63,6 +81,23 @@ class Main :
 		else :
 			messagebox.showerror("Failed", "The textbox is empty please login or register first")
 
+	def regis_process(self) :
+		username = self.entry_username.get()
+		password = self.entry_password.get()
+
+		if username != "" and password != "" :
+			stat_login = current_session.regis_user(username,password)
+
+			if stat_login == True :
+				messagebox.showinfo("Success", f"Your ID is created !")
+				# self.open_main_window()
+
+				self.login_page()
+
+			else :
+				messagebox.showerror("Failed", "Invalid input")
+		else :
+			messagebox.showerror("Failed", "The textbox is empty please login or register first")
 
 		
 	def open_main_window(self):

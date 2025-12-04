@@ -38,5 +38,16 @@ class Login:
         
         return False
 
+    def regis_user(self, username, password):
+        sql = "INSERT INTO data_user (username, password) VALUES (%s, %s)"
+        val = (username, password)
+        result = self.db.execute(sql, val)
+
+        if result:
+            self.user_name = username
+            return True
+        
+        return False
+
     def logout(self):
         self.user_name = None

@@ -142,24 +142,17 @@ class Main :
 
 		style = ttk.Style()
 		style.theme_use('clam')
-		style.configure('Warna.TFrame', background = 'black')
+		style.configure('Warna.TFrame', background = 'black',foreground = 'white')
 		style.configure('1.TButton',foreground = 'white',background = 'black',padding = 5)
 
 		top_frame = ttk.Frame(self.root, style = 'Warna.TFrame')
 		top_frame.pack(fill='x', pady=0,)
 
-		crud_frame = ttk.Frame(self.root,style = 'Warna.TFrame')
-		crud_frame.pack(fill='x',side='bottom',pady=0)
-
 		ttk.Label(top_frame,
-		          text=f'Storage',background= 'black',foreground='White',
-		          font=('times new roman', 30, 'bold')).pack(side="left", padx=10)
+		          text=f'Storage',background='black',foreground='white',font=('times new roman', 30, 'bold')).pack(side="left", padx=10)
 	
 		ttk.Button(top_frame, text="Back",style= '1.TButton', command=self.open_main_window).pack(side="right", padx=10)
-		ttk.Button(crud_frame, text='Add', style='1.TButton', command=self.tambah_barang).pack(side='left', padx=5)
-		ttk.Button(crud_frame,text='Edit',style='1.TButton',command=self.edit_barang).pack(side = 'left',padx=5)
-		ttk.Button(crud_frame, text='Delete', style='1.TButton', command=self.hapus_barang).pack(side='left', padx=5)
-
+		
 		self.table = ttk.Treeview(self.root, columns=('id_barang','kode_barang','nama_barang','status_barang',),show="headings")
 		self.table.heading("id_barang",text="ID")
 		self.table.heading("kode_barang",text="CODE")
@@ -171,6 +164,14 @@ class Main :
 		self.table.column("nama_barang",width=120, anchor="center")
 		self.table.column("status_barang",width=60, anchor="center")
 
+		self.table.pack(fill='both', expand=True, padx=10, pady=10)
+
+		crud_frame = ttk.Frame(self.root,style = 'Warna.TFrame')
+		crud_frame.pack(fill='x',side='bottom',pady=5,padx=10)
+
+		ttk.Button(crud_frame, text='Add', style='1.TButton', command=self.tambah_barang).pack(side='left', padx=5)
+		ttk.Button(crud_frame,text='Edit',style='1.TButton',command=self.edit_barang).pack(side = 'left',padx=5)
+		ttk.Button(crud_frame, text='Delete', style='1.TButton', command=self.hapus_barang).pack(side='left', padx=5)
         
 	def tambah_barang(self):
 		self
@@ -179,7 +180,6 @@ class Main :
 	def hapus_barang(self):
 		self
 	
-
 	def Ruangan(self):
 		self.clear_window()
 
@@ -202,7 +202,7 @@ class Main :
 		for widget in self.root.winfo_children():
 			widget.destroy()
 
-		# def load_table_data(self):
+	# 	def load_table_data(self):
 	# 	for item in self.table.get_children():
 	# 		self.table.delete(row)
 
@@ -211,8 +211,8 @@ class Main :
     #     	self.tree.insert("", "end", values=row)
 
 	# self.table.pack(fill="both", expand=True)
-		# self.table.bind("<ButtonRelease-1>", self.on_table_click)
-		# self.load_table_data()
+	# 	self.table.bind("<ButtonRelease-1>", self.on_table_click)
+	# 	self.load_table_data()
 
 # ---------- RUN APP ----------
 if __name__ == "__main__":

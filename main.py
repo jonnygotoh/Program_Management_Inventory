@@ -182,16 +182,46 @@ class Main :
 	
 	def Ruangan(self):
 		self.clear_window()
+		self.root.title ('Ruangan')
+
+		style = ttk.Style()
+		style.theme_use('clam')
+		style.configure('Warna.TFrame', background = 'black',foreground = 'white')
+		style.configure('1.TButton',foreground = 'white',background = 'black',padding = 5)
+
+		top_frame = ttk.Frame(self.root, style = 'Warna.TFrame')
+		top_frame.pack(fill='x', pady=0,)
+
+		ttk.Label(top_frame,
+		          text=f'Ruangan',background='black',foreground='white',font=('times new roman', 30, 'bold')).pack(side="left", padx=10)
+	
+		ttk.Button(top_frame, text="Back",style= '1.TButton', command=self.open_main_window).pack(side="right", padx=10)
 
 		self.table = ttk.Treeview(self.root, columns=('kode_ruangan','nama_ruangan',),show="headings")
 		self.table.heading("kode_ruangan",text="Kode Ruangan")
-		self.table.heading("nama_barang",text="Nama Ruangan")
+		self.table.heading("nama_ruangan",text="Nama Ruangan")
 
 		self.table.column("kode_ruangan",width=60)
 		self.table.column("nama_ruangan",width=60, anchor="center")
 
+		self.table.pack(fill='both', expand=True, padx=10, pady=10)
+
+		crud_frame = ttk.Frame(self.root,style = 'Warna.TFrame')
+		crud_frame.pack(fill='x',side='bottom',pady=5,padx=10)
+
+		ttk.Button(crud_frame, text='Add', style='1.TButton', command=self.tambah_ruang).pack(side='left', padx=5)
+		ttk.Button(crud_frame,text='Edit',style='1.TButton',command=self.edit_ruang).pack(side = 'left',padx=5)
+		ttk.Button(crud_frame, text='Delete', style='1.TButton', command=self.hapus_ruang).pack(side='left', padx=5)
+        
+	def tambah_ruang(self):
+		self
+	def edit_ruang(self):
+		self
+	def hapus_ruang(self):
+		self
+
 	def Kategori(self):
-		self.clear_window
+		self.clear_window()
 
 	def logout(self):
 		current_session.logout()

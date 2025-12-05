@@ -22,6 +22,25 @@ def tampilkan_barang():
     sql = "SELECT * FROM data_inventory"
     return db.fetch(sql)
 
+def tambah_ruang(kode, nama):
+    sql = "INSERT INTO data_ruangan (kode_ruangan, nama_ruangan) VALUES (%s, %s, %s)"
+    val = (kode, nama)
+    return db.execute(sql, val)
+
+def update_ruang(kode_ruangan, nama_ruangan):
+    sql = "UPDATE data_ruangan SET nama_ruangan=%s WHERE kode_ruangan=%s"
+    val = (kode_ruangan, nama_ruangan)
+    return db.execute(sql, val)
+
+def hapus_ruang(kode_ruangan):
+    sql = "DELETE FROM data_ruangan WHERE kode_ruangan=%s"
+    val = (kode_ruangan)
+    return db.execute(sql, val)
+
+def tampilkan_ruang():
+    sql = "SELECT * FROM data_ruangan"
+    return db.fetch(sql)
+
 class Login:
     def __init__(self):
         self.db = db()

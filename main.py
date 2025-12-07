@@ -262,6 +262,75 @@ class Main :
 	def hapus_ruang(self):
 		self
 
+def Kategori(self):
+    self.clear_window()
+    self.root.title('Kategori')
+
+    style = ttk.Style()
+    style.theme_use('clam')
+    style.configure('Warna.TFrame', background='black', foreground='white')
+    style.configure('1.TButton', foreground='white', background='black', padding=5)
+
+    top_frame = ttk.Frame(self.root, style='Warna.TFrame')
+    top_frame.pack(fill='x', pady=0)
+
+    ttk.Label(
+        top_frame,
+        text='Kategori',
+        background='black',
+        foreground='white',
+        font=('times new roman', 30, 'bold')
+    ).pack(side="left", padx=10)
+
+    # Tombol filter Elektronik & Furniture
+    ttk.Button(top_frame, text="Elektronik", style='1.TButton',
+               command=lambda: self.load_kategori_data("EL")).pack(side="right", padx=5)
+
+    ttk.Button(top_frame, text="Furniture", style='1.TButton',
+               command=lambda: self.load_kategori_data("FU")).pack(side="right", padx=5)
+
+    ttk.Button(top_frame, text="Back", style='1.TButton',
+               command=self.open_main_window).pack(side="right", padx=10)
+
+    # Tabel
+    self.table = ttk.Treeview(self.root, columns=('kode_barang','nama_barang','merek_barang'), show="headings")
+    self.table.heading("kode_barang", text="Kode")
+    self.table.heading("nama_barang", text="Nama")
+    self.table.heading("merek_barang", text="Merek")
+
+    self.table.column("kode_barang", width=60)
+    self.table.column("nama_barang", width=60, anchor="center")
+    self.table.column("merek_barang", width=60, anchor="center")
+
+    self.table.pack(fill='both', expand=True, padx=10, pady=10)
+
+    # Load semua data
+    self.load_kategori_data()
+
+
+def load_kategori_data(self, prefix=None):
+    cursor = db.cursor()
+
+    if prefix:
+        cursor.execute(
+            "SELECT kode_barang, nama_barang, merek_barang FROM data_kategori WHERE kode_barang LIKE %s",
+            (prefix + "%",)
+        )
+    else:
+        cursor.execute(
+            "SELECT kode_barang, nama_barang, merek_barang FROM data_kategori"
+        )
+
+    rows = cursor.fetchall()
+
+    # Clear table
+    for item in self.table.get_children():
+        self.table.delete(item)
+
+    # Insert table
+    for row in rows:
+        self.table.insert("", "end", values=row)
+		
 	def Kategori(self):
 		self.clear_window()
 		self.root.title ('Kategori')

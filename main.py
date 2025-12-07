@@ -217,10 +217,86 @@ class Main :
 
 		ttk.Button(frame, text='Tambah', command=submit).pack(pady=10)
 
-	def edit_barang(self):
-		self
-	def hapus_barang(self):
-		self
+	# def edit_barang(self):
+    # 		selected = self.table.focus()
+    # 		if not selected:
+    #     		messagebox.showwarning("Warning", "Pilih data yang mau diedit!")
+    #     		return
+
+    # 		data = self.table.item(selected)['values']
+    # 		id_barang = data[0]
+    # 		kode_awal = data[1]
+    # 		nama_awal = data[2]
+    # 		status_awal = data[3]
+
+    # # Popup window
+    # 		self.crud = Toplevel(self.root)
+    # 		self.crud.title("Edit Barang")
+    # 		self.crud.geometry("400x250")
+    # 		self.crud.resizable(False, False)
+
+    # 		frame = ttk.Frame(self.crud, padding=10)
+    # 		frame.pack(fill='both', expand=True)
+
+    # # INPUT KODE
+    # 		ttk.Label(frame, text='Kode').pack(anchor='w')
+    # 		entry_kode = ttk.Entry(frame)
+    # 		entry_kode.insert(0, kode_awal)
+    # 		entry_kode.pack(fill='x')
+
+    # # INPUT NAMA
+    # 		ttk.Label(frame, text='Nama').pack(anchor='w')
+    # 		entry_nama = ttk.Entry(frame)
+    # 		entry_nama.insert(0, nama_awal)
+    # 		entry_nama.pack(fill='x')
+
+    # # INPUT STATUS
+    # 		ttk.Label(frame, text='Status').pack(anchor='w')
+    # 		entry_status = ttk.Entry(frame)
+    # 		entry_status.insert(0, status_awal)
+    # 		entry_status.pack(fill='x')
+
+    # 		def submit():
+    #     		kode = entry_kode.get()
+    #     		nama = entry_nama.get()
+    #     		status = entry_status.get()
+
+    #     		if not (kode and nama and status):
+    #         			messagebox.showerror("Error", "Semua kolom harus diisi!")
+    #         			return
+
+    #     		cursor = db.cursor()
+    #     		cursor.execute("""
+    #         UPDATE barang_gudang
+    #         SET kode_barang=%s, nama_barang=%s, status_barang=%s
+    #         WHERE id_barang=%s
+    #     """, (kode, nama, status, id_barang))
+
+    #     		db.commit()
+
+    #    			messagebox.showinfo("Success", "Barang berhasil diedit!")
+    #     		self.crud.destroy()
+    #     		self.load_inventory_data()
+
+    # 		ttk.Button(frame, text='Simpan Perubahan', command=submit).pack(pady=10)
+
+
+	# def hapus_barang(self):
+    # 		selected = self.table.focus()
+    # 		if not selected:
+    #     		messagebox.showwarning("Warning", "Pilih data yang mau dihapus!")
+    #     		return
+
+    # 		data = self.table.item(selected)['values']
+    # 		id_barang = data[0]
+
+    # 		if messagebox.askyesno("Confirm", f"Hapus barang ID {id_barang}?"):
+    #     		cursor = db.cursor()
+    #     		cursor.execute("DELETE FROM barang_gudang WHERE id_barang=%s", (id_barang,))
+    #     		db.commit()
+    #     		self.load_inventory_data()
+    #     		messagebox.showinfo("Success", "Barang berhasil dihapus!")
+
 	
 	def Ruangan(self):
 		self.clear_window()
@@ -257,42 +333,102 @@ class Main :
         
 	def tambah_ruang(self):
 		self
-	def edit_ruang(self):
-		self
-	def hapus_ruang(self):
-		self
+
+
+# def Kategori(self):
+#     self.clear_window()
+#     self.root.title('Kategori')
+
+#     style = ttk.Style()
+#     style.theme_use('clam')
+#     style.configure('Warna.TFrame', background='black', foreground='white')
+#     style.configure('1.TButton', foreground='white', background='black', padding=5)
+
+#     top_frame = ttk.Frame(self.root, style='Warna.TFrame')
+#     top_frame.pack(fill='x', pady=0)
+
+#     ttk.Label(
+#         top_frame,
+#         text='Kategori',
+#         background='black',
+#         foreground='white',
+#         font=('times new roman', 30, 'bold')
+#     ).pack(side="left", padx=10)
+
+#     # Tombol filter Elektronik & Furniture
+#     ttk.Button(top_frame, text="Elektronik", style='1.TButton',
+#                command=lambda: self.load_kategori_data("EL")).pack(side="right", padx=5)
+
+#     ttk.Button(top_frame, text="Furniture", style='1.TButton',
+#                command=lambda: self.load_kategori_data("FU")).pack(side="right", padx=5)
+
+#     ttk.Button(top_frame, text="Back", style='1.TButton',
+#                command=self.open_main_window).pack(side="right", padx=10)
+
+#     # Tabel
+#     self.table = ttk.Treeview(self.root, columns=('kode_barang','nama_barang','merek_barang'), show="headings")
+#     self.table.heading("kode_barang", text="Kode")
+#     self.table.heading("nama_barang", text="Nama")
+#     self.table.heading("merek_barang", text="Merek")
+
+#     self.table.column("kode_barang", width=60)
+#     self.table.column("nama_barang", width=60, anchor="center")
+#     self.table.column("merek_barang", width=60, anchor="center")
+
+#     self.table.pack(fill='both', expand=True, padx=10, pady=10)
+
+#     # Load semua data
+#     self.load_kategori_data()
+
+
+# def load_kategori_data(self, prefix=None):
+#     cursor = db.cursor()
+
+#     if prefix:
+#         cursor.execute(
+#             "SELECT kode_barang, nama_barang, merek_barang FROM data_kategori WHERE kode_barang LIKE %s",
+#             (prefix + "%",)
+#         )
+#     else:
+#         cursor.execute(
+#             "SELECT kode_barang, nama_barang, merek_barang FROM data_kategori"
+#         )
+
+#     rows = cursor.fetchall()
+
+#     # Clear table
+#     for item in self.table.get_children():
+#         self.table.delete(item)
+
+#     # Insert table
+#     for row in rows:
+#         self.table.insert("", "end", values=row)
 
 	def Kategori(self):
 		self.clear_window()
-		self.root.title('Kategori')
+		self.root.title ('Kategori')
 
 		style = ttk.Style()
 		style.theme_use('clam')
-		style.configure('Warna.TFrame', background='black', foreground='white')
-		style.configure('1.TButton', foreground='white', background='black', padding=5)
+		style.configure('Warna.TFrame', background = 'black',foreground = 'white')
+		style.configure('1.TButton',foreground = 'white',background = 'black',padding = 5)
 
-		top_frame = ttk.Frame(self.root, style='Warna.TFrame')
-		top_frame.pack(fill='x', pady=0)
+		top_frame = ttk.Frame(self.root, style = 'Warna.TFrame')
+		top_frame.pack(fill='x', pady=0,)
 
 		ttk.Label(top_frame,
 		          text=f'Kategori',background='black',foreground='white',font=('times new roman', 30, 'bold')).pack(side="left", padx=10)
-		ttk.Button(top_frame, text="Back", style='1.TButton',
-               command=self.open_main_window).pack(side="right", padx=10)
-		
-		ttk.Button(top_frame, text="Elektronik", style='1.TButton',
-               command=lambda: self.load_kategori_data("EL")).pack(side="right", padx=5)
+	
+		ttk.Button(top_frame, text="Back",style= '1.TButton', command=self.open_main_window).pack(side="right", padx=10)
 
-		ttk.Button(top_frame, text="Furniture", style='1.TButton',
-               command=lambda: self.load_kategori_data("FU")).pack(side="right", padx=5)
+		self.table = ttk.Treeview(self.root, columns=('kode_barang','nama_barang','merek_barang'),show="headings")
+		self.table.heading("kode_barang",text="Kode")
+		self.table.heading("nama_barang",text="Nama")
+		self.table.heading("merek_barang",text="Merek")
 
-		self.table = ttk.Treeview(self.root, columns=('kode_barang','nama_barang','merek_barang'), show="headings")
-		self.table.heading("kode_barang", text="Kode")
-		self.table.heading("nama_barang", text="Nama")
-		self.table.heading("merek_barang", text="Merek")
-
-		self.table.column("kode_barang", width=60)
-		self.table.column("nama_barang", width=60, anchor="center")
-		self.table.column("merek_barang", width=60, anchor="center")
+		self.table.column("kode_barang",width=60)
+		self.table.column("nama_barang",width=60, anchor="center")
+		self.table.column("merek_barang",width=60, anchor="center")
 
 		self.table.pack(fill='both', expand=True, padx=10, pady=10)
 
@@ -303,30 +439,9 @@ class Main :
 		ttk.Button(crud_frame,text='Edit',style='1.TButton',command=self.edit_kategori).pack(side = 'left',padx=5)
 		ttk.Button(crud_frame, text='Delete', style='1.TButton', command=self.hapus_kategori).pack(side='left', padx=5)
         
-		self.load_kategori_data()
-
-	def load_kategori_data(self, prefix=None):
-		cursor = datab.cursor()
-
-		if prefix:
-			cursor.execute("SELECT kode_barang, nama_barang, merek_barang FROM data_kategori WHERE kode_barang LIKE %s",(prefix + "%",))
-		else:
-			cursor.execute("SELECT kode_barang, nama_barang, merek_barang FROM data_kategori")
-
-		rows = cursor.fetchall()
-
-		for item in self.table.get_children():
-			self.table.delete(item)
-
-		for row in rows:
-			self.table.insert("", "end", values=row)
-		
 	def tambah_kategori(self):
 		self
-	def edit_kategori(self):
-		self
-	def hapus_kategori(self):
-		self
+	
 
 	def logout(self):
 		current_session.logout()
@@ -337,7 +452,7 @@ class Main :
 		for widget in self.root.winfo_children():
 			widget.destroy()
 
-	# 	def load_table_data(self):
+	# def load_table_data(self):
 	# 	for item in self.table.get_children():
 	# 		self.table.delete(row)
 

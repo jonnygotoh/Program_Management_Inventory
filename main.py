@@ -321,34 +321,6 @@ class Main :
 		for row in rows:
 			self.table.insert("", "end", values=row)
 		
-	# def Kategori(self):
-	# 	self.clear_window()
-	# 	self.root.title ('Kategori')
-
-	# 	style = ttk.Style()
-	# 	style.theme_use('clam')
-	# 	style.configure('Warna.TFrame', background = 'black',foreground = 'white')
-	# 	style.configure('1.TButton',foreground = 'white',background = 'black',padding = 5)
-
-	# 	top_frame = ttk.Frame(self.root, style = 'Warna.TFrame')
-	# 	top_frame.pack(fill='x', pady=0,)
-
-		# ttk.Label(top_frame,
-		#           text=f'Kategori',background='black',foreground='white',font=('times new roman', 30, 'bold')).pack(side="left", padx=10)
-	
-	# 	ttk.Button(top_frame, text="Back",style= '1.TButton', command=self.open_main_window).pack(side="right", padx=10)
-
-	# 	self.table = ttk.Treeview(self.root, columns=('kode_barang','nama_barang','merek_barang'),show="headings")
-	# 	self.table.heading("kode_barang",text="Kode")
-	# 	self.table.heading("nama_barang",text="Nama")
-	# 	self.table.heading("merek_barang",text="Merek")
-
-	# 	self.table.column("kode_barang",width=60)
-	# 	self.table.column("nama_barang",width=60, anchor="center")
-	# 	self.table.column("merek_barang",width=60, anchor="center")
-
-	# 	self.table.pack(fill='both', expand=True, padx=10, pady=10)
-
 	def tambah_kategori(self):
 		self
 	def edit_kategori(self):

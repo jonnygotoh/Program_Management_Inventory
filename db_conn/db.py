@@ -39,4 +39,4 @@ class database:
                 self.cur.execute(stmt)
         self.dbgw.commit()
 
-data = database
+data = database()

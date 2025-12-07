@@ -173,8 +173,50 @@ class Main :
 		ttk.Button(crud_frame,text='Edit',style='1.TButton',command=self.edit_barang).pack(side = 'left',padx=5)
 		ttk.Button(crud_frame, text='Delete', style='1.TButton', command=self.hapus_barang).pack(side='left', padx=5)
         
+		self.load_inventory_data()
+
+	def load_inventory_data(self):
+		self.table.delete(*self.table.get_children())
+		data = sys.tampilkan_barang()
+		
+		for row in data:
+			self.table.insert('', 'end', values=row)
+
 	def tambah_barang(self):
-		self
+		self.crud = Toplevel(self.root)
+		self.crud.title ('Tambah Barang')
+		self.crud.geometry('400x250')
+		self.crud.resizable(False,False)
+
+		frame = ttk.Frame(self.crud, padding=10)
+		frame.pack(fill='both', expand=True)
+
+		ttk.Label(frame, text='Kode').pack(anchor='w')
+		entry_kode = ttk.Entry(frame)
+		entry_kode.pack(fill='x')
+
+		ttk.Label(frame, text='Nama').pack(anchor='w')
+		entry_nama = ttk.Entry(frame)
+		entry_nama.pack(fill='x')
+
+		ttk.Label(frame, text='Status').pack(anchor='w')
+		entry_status = ttk.Entry(frame)
+		entry_status.pack(fill='x')
+
+		def submit():
+			kode = entry_kode.get()
+			nama = entry_nama.get()
+			status = entry_status.get()
+			if kode and nama and status:
+				sys.tambah_barang(kode,nama,status)
+				messagebox.showinfo('Success', 'Barang berhasil ditambahkan!')
+				self.crud.destroy()
+				self.load_inventory_data()
+			else:
+				messagebox.showerror('Error', 'Semua kolom harus diisi!')
+
+		ttk.Button(frame, text='Tambah', command=submit).pack(pady=10)
+
 	def edit_barang(self):
 		self
 	def hapus_barang(self):

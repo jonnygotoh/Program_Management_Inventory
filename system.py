@@ -43,7 +43,7 @@ def tampilkan_ruang():
 
 class Login:
     def __init__(self):
-        self.db = db()
+        self.db = db
         self.user_name = None   
 
     def login_user(self, username, password):

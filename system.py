@@ -22,6 +22,18 @@ def tampilkan_barang():
     sql = "SELECT * FROM data_inventory"
     return db.fetch(sql,())
 
+def tampilkan_barang_prefix(prefix=None):
+    # Query untuk mengambil data barang berdasarkan prefix kode_barang
+    if prefix:
+        sql = "SELECT kode_barang, nama_barang, status_barang FROM data_inventory WHERE kode_barang LIKE %s"
+        val = (prefix + "%",)  # Menambahkan wildcard (%) untuk pencarian
+    else:
+        sql = "SELECT kode_barang, nama_barang, status_barang FROM data_inventory"
+        val = ()
+
+    # Eksekusi query untuk mengambil data barang
+    return db.fetch(sql, val)
+
 # def tambah_ruang(kode, nama):
 #     sql = "INSERT INTO data_ruangan (kode_ruangan, nama_ruangan) VALUES (%s, %s, %s)"
 #     val = (kode, nama)

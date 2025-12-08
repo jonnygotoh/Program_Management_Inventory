@@ -10,7 +10,7 @@ CREATE TABLE `data_inventory` (
 CREATE TABLE `data_kategori` (
   `kode_barang` varchar(20) NOT NULL,
   `nama_barang` varchar(100) DEFAULT NULL,
-  `merek_barang` varchar(100) DEFAULT NULL,
+  `status_barang` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`kode_barang`),
   CONSTRAINT `fk_kategori_inventory` FOREIGN KEY (`kode_barang`) REFERENCES `data_inventory` (`kode_barang`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;

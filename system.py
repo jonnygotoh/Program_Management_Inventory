@@ -3,14 +3,14 @@ from db_conn.db import data
 db = data
 # Membuat CRUD (Create, Read, Update, Delete dan juga fetch/menampilkan barang)
 
-def tambah_barang(kode, nama, status):
-    sql = "INSERT INTO data_inventory (kode_barang, nama_barang, status_barang) VALUES (%s, %s, %s)"
-    val = (kode, nama, status)
+def tambah_barang(id, kode, nama, status):
+    sql = "INSERT INTO data_inventory (id_inventory, kode_barang, nama_barang, status_barang) VALUES (%s, %s, %s,%s)"
+    val = (id,kode, nama, status)
     return db.execute(sql, val)
 
-def update_barang(id, nama, stok):
+def update_barang(id, nama, status,):
     sql = "UPDATE data_inventory SET nama_barang=%s, status_barang=%s WHERE id_inventory=%s"
-    val = (nama, stok, id)
+    val = (nama, status, id)
     return db.execute(sql, val)
 
 def hapus_barang(id):

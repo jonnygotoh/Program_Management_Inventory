@@ -22,7 +22,7 @@ def tampilkan_barang():
     sql = "SELECT * FROM data_inventory"
     return db.fetch(sql,())
 
-def tampilkan_barang_prefix(prefix=None):
+def tampilkan_kategori_prefix(prefix=None):
     # Query untuk mengambil data barang berdasarkan prefix kode_barang
     if prefix:
         sql = "SELECT kode_barang, nama_barang, status_barang FROM data_inventory WHERE kode_barang LIKE %s"
@@ -34,24 +34,18 @@ def tampilkan_barang_prefix(prefix=None):
     # Eksekusi query untuk mengambil data barang
     return db.fetch(sql, val)
 
-# def tambah_ruang(kode, nama):
-#     sql = "INSERT INTO data_ruangan (kode_ruangan, nama_ruangan) VALUES (%s, %s, %s)"
-#     val = (kode, nama)
-#     return db.execute(sql, val)
+def tampilkan_ruang_prefix(prefix=None):
+    # Query untuk mengambil data barang berdasarkan prefix kode_barang
+    
+    if prefix:
+        sql = 'SELECT id_inventory, nama_barang, status_barang FROM data_inventory WHERE CAST(id_inventory AS CHAR) LIKE %s'
+        val = (prefix + '%',)  # Menambahkan wildcard (%) untuk pencarian
+    else:
+        sql = "SELECT id_inventory, nama_barang, status_barang FROM data_inventory"
+        val = ()
 
-# def update_ruang(kode_ruangan, nama_ruangan):
-#     sql = "UPDATE data_ruangan SET nama_ruangan=%s WHERE kode_ruangan=%s"
-#     val = (kode_ruangan, nama_ruangan)
-#     return db.execute(sql, val)
-
-# def hapus_ruang(kode_ruangan):
-#     sql = "DELETE FROM data_ruangan WHERE kode_ruangan=%s"
-#     val = (kode_ruangan)
-#     return db.execute(sql, val)
-
-# def tampilkan_ruang():
-#     sql = "SELECT * FROM data_ruangan"
-#     return db.fetch(sql)
+    # Eksekusi query untuk mengambil data barang
+    return db.fetch(sql, val)
 
 class Login:
     def __init__(self):

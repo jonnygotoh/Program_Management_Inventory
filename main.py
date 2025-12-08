@@ -47,24 +47,6 @@ class Main :
 
 		ttk.Button(self.root, text="Register", command=self.regis_process).pack(pady=15)
 
-	def regis_page(self) :
-		self.clear_window()
-
-		self.root.title("Register Page")
-		self.root.geometry("450x270")
-
-		ttk.Label(self.root, text="Get Your Username Here").pack(pady=5)
-		
-		ttk.Label(self.root, text="New Username:").pack(pady=5)
-		self.entry_username = ttk.Entry(self.root)
-		self.entry_username.pack()
-
-		ttk.Label(self.root, text="Password:").pack(pady=5)
-		self.entry_password = ttk.Entry(self.root, show="*")
-		self.entry_password.pack()
-
-		ttk.Button(self.root, text="Register", command=self.regis_process).pack(pady=15)
-
 	def login_process(self) :
 		username = self.entry_username.get()
 		password = self.entry_password.get()
@@ -304,40 +286,50 @@ class Main :
 	
 	def Ruangan(self):
 		self.clear_window()
-		self.root.title ('Ruangan')
+		self.root.title('Ruangan')
 
 		style = ttk.Style()
 		style.theme_use('clam')
-		style.configure('Warna.TFrame', background = 'black',foreground = 'white')
-		style.configure('1.TButton',foreground = 'white',background = 'black',padding = 5)
+		style.configure('Warna.TFrame', background='black', foreground='white')
+		style.configure('1.TButton', foreground='white', background='black', padding=5)
 
-		top_frame = ttk.Frame(self.root, style = 'Warna.TFrame')
-		top_frame.pack(fill='x', pady=0,)
+		top_frame = ttk.Frame(self.root, style='Warna.TFrame')
+		top_frame.pack(fill='x', pady=0)
 
-		ttk.Label(top_frame,
-		          text=f'Ruangan',background='black',foreground='white',font=('times new roman', 30, 'bold')).pack(side="left", padx=10)
-	
-		ttk.Button(top_frame, text="Back",style= '1.TButton', command=self.open_main_window).pack(side="right", padx=10)
+		ttk.Label(top_frame,text='Ruangan',background='black',foreground='white',font=('times new roman', 30, 'bold')).pack(side="left", padx=10)
 
-		self.table = ttk.Treeview(self.root, columns=('kode_ruangan','nama_ruangan',),show="headings")
-		self.table.heading("kode_ruangan",text="Kode Ruangan")
-		self.table.heading("nama_ruangan",text="Nama Ruangan")
+		ttk.Button(top_frame, text="Ruang 20", style='1.TButton',command=lambda: self.load_ruangan_data("20")).pack(side="right", padx=5)
 
-		self.table.column("kode_ruangan",width=60)
-		self.table.column("nama_ruangan",width=60, anchor="center")
+		ttk.Button(top_frame, text="Ruang 10", style='1.TButton',command=lambda: self.load_ruangan_data("10")).pack(side="right", padx=5)
+
+		ttk.Button(top_frame, text="Back", style='1.TButton',command=self.open_main_window).pack(side="right", padx=10)
+
+		self.table = ttk.Treeview(self.root, columns=('Id_inventory','nama_barang','status_barang'), show="headings")
+		self.table.heading("Id_inventory", text="Kode Barang")
+		self.table.heading("nama_barang", text="Nama Barang")
+		self.table.heading('status_barang',text='Status Barang')
+
+		self.table.column("Id_inventory", width=60, anchor='center')
+		self.table.column("nama_barang", width=60, anchor="center")
+		self.table.column('status_barang',width=60, anchor='center')
 
 		self.table.pack(fill='both', expand=True, padx=10, pady=10)
+		
+		self.load_ruangan_data(prefix=None)
 
-		crud_frame = ttk.Frame(self.root,style = 'Warna.TFrame')
-		crud_frame.pack(fill='x',side='bottom',pady=5,padx=10)
+	def load_ruangan_data(self, prefix=None):
+		rows = sys.tampilkan_ruang_prefix(prefix)
 
-		ttk.Button(crud_frame, text='Ruang', style='1.TButton', command=self.kode_ruang).pack(side='left', padx=5)
-		# ttk.Button(crud_frame,text='Edit',style='1.TButton',command=self.edit_ruang).pack(side = 'left',padx=5)
-		# ttk.Button(crud_frame, text='Delete', style='1.TButton', command=self.hapus_ruang).pack(side='left', padx=5)
-        
+    # Clear table
+		for item in self.table.get_children():
+			self.table.delete(item)
+
+    # Insert table
+		for row in rows:
+			self.table.insert("", "end", values=row)
+
 	def kode_ruang(self):
 		self
-
 
 	def Kategori(self):
 		self.clear_window()
@@ -370,11 +362,11 @@ class Main :
 
 		self.table.pack(fill='both', expand=True, padx=10, pady=10)
 		
-		self.load_kategori_data()
+		self.load_kategori_data(prefix=None)
 
 
 	def load_kategori_data(self, prefix=None):
-		rows = sys.tampilkan_barang_prefix(prefix)
+		rows = sys.tampilkan_kategori_prefix(prefix)
 
     # Clear table
 		for item in self.table.get_children():
@@ -384,8 +376,6 @@ class Main :
 		for row in rows:
 			self.table.insert("", "end", values=row)
 
-	def tambah_kategori(self):
-		self
 	
 	def logout(self):
 		current_session.logout()

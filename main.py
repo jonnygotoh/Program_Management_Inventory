@@ -230,25 +230,33 @@ class Main :
 
 		data = self.table.item(selected)['values']
 		id_awal = data[0]
+		kode_awal = data[1]
 		nama_awal = data[2]
 		status_awal = data[3]
 
 		self.crud = Toplevel(self.root)
 		self.crud.title("Edit Barang")
-		self.crud.geometry("400x250")
+		self.crud.geometry("500x350")
 		self.crud.resizable(False, False)
 
 		frame = ttk.Frame(self.crud, padding=10)
 		frame.pack(fill='both', expand=True)
+		
+		ttk.Label(frame, text='ID Lama').pack(anchor='w')
+		entry_id_lama = ttk.Entry(frame)
+		entry_id_lama.insert(0, id_awal)
+		entry_id_lama.configure(state='disabled')
+		entry_id_lama.pack(fill='x')
 
 		ttk.Label(frame, text='Id').pack(anchor='w')
 		entry_id = ttk.Entry(frame)
+		entry_id.insert(0, id_awal)
 		entry_id.pack(fill='x')
 
-		ttk.Label(frame, text='Nama').pack(anchor='w')
-		entry_nama = ttk.Entry(frame)
-		entry_nama.insert(0, id_awal)
-		entry_nama.pack(fill='x')
+		ttk.Label(frame, text='Kode').pack(anchor='w')
+		entry_kode = ttk.Entry(frame)
+		entry_kode.insert(0, kode_awal)
+		entry_kode.pack(fill='x')
 
 		ttk.Label(frame, text='Nama').pack(anchor='w')
 		entry_nama = ttk.Entry(frame)
@@ -261,27 +269,22 @@ class Main :
 		entry_status.pack(fill='x')
 
 		def submit():
-			id = entry_id.get()
+			id_baru = entry_id.get()
+			id_lama = entry_id_lama.get()
+			kode = entry_kode.get()
 			nama = entry_nama.get()
 			status = entry_status.get()
 
-			if not (id and nama and status):
+			if not (id_baru and kode and nama and status):
 				messagebox.showerror("Error", "Semua kolom harus diisi!")
 				return
 
-			cursor = datab.cursor()
-			cursor.execute("""
-            UPDATE barang_gudang
-            SET nama_barang=%s, status_barang=%s
-            WHERE id_inventory=%s
-        """,(id, nama, status))
-
-			datab.commit()
+			sys.update_barang(id_lama, id_baru,  kode, nama, status)
 			messagebox.showinfo("Success", "Barang berhasil diedit!")
-			self.crud.destroy()
 			self.load_inventory_data()
+			self.crud.destroy()
 
-			ttk.Button(frame, text='Simpan Perubahan', command=submit).pack(pady=10)
+		ttk.Button(frame, text='Save', command=submit).pack(pady=10,anchor= 'w')
 
 
 	def hapus_barang(self):
@@ -294,8 +297,7 @@ class Main :
 		id_barang = data[0]
 	
 		if messagebox.askyesno("Confirm", f"Hapus barang ID {id_barang}?"):
-			sql = "DELETE FROM data_inventory WHERE id_inventory=%s"
-			datab.data.execute(sql, (id_barang,))
+			sys.hapus_barang(id_barang)
 			self.load_inventory_data()
 			messagebox.showinfo("Success", "Barang berhasil dihapus!")
 

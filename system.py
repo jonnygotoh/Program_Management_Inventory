@@ -8,14 +8,14 @@ def tambah_barang(id, kode, nama, status):
     val = (id,kode, nama, status)
     return db.execute(sql, val)
 
-def update_barang(id, nama, status,):
-    sql = "UPDATE data_inventory SET nama_barang=%s, status_barang=%s WHERE id_inventory=%s"
-    val = (nama, status, id)
+def update_barang(id_lama, id_baru, kode, nama, status):
+    sql = "UPDATE data_inventory SET id_inventory=%s, kode_barang=%s, nama_barang=%s, status_barang=%s WHERE id_inventory=%s"
+    val = (id_baru, kode, nama, status, id_lama)
     return db.execute(sql, val)
 
-def hapus_barang(id):
+def hapus_barang(id_barang):
     sql = "DELETE FROM data_inventory WHERE id_inventory=%s"
-    val = (id,)
+    val = (id_barang,)
     return db.execute(sql, val)
 
 def tampilkan_barang():

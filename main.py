@@ -18,16 +18,30 @@ class Main :
 		self.root.title("Login Page")
 		self.root.geometry("450x270")
 
-		ttk.Label(self.root, text="Username:").pack(pady=5)
+		style = ttk.Style()
+		style.theme_use('clam')
+		style.configure('aw.TButton',font = ('times new roman',15,))
+		style.configure('log.TFrame',background = 'skyblue')
+
+		frame = ttk.Frame(self.root, padding=10,style='log.TFrame')
+		frame.pack(fill='both')
+
+		ttk.Label(frame, text="Login",background='skyblue',font=('times new roman',20, 'bold')).pack(pady=5)
+		
+		self.logoLogin = PhotoImage(file= 'Login.png')
+		imageLabel = ttk.Label(image= self.logoLogin)
+		imageLabel.pack(pady=45,anchor='center') 
+
+		ttk.Label(self.root, text="Username:",font=('times new roman',20, 'bold')).pack(pady=5)
 		self.entry_username = ttk.Entry(self.root)
 		self.entry_username.pack()
 
-		ttk.Label(self.root, text="Password:").pack(pady=5)
+		ttk.Label(self.root, text="Password:",font=('times new roman',20, 'bold')).pack(pady=5)
 		self.entry_password = ttk.Entry(self.root, show="*")
 		self.entry_password.pack()
 
-		ttk.Button(self.root, text="Login", command=self.login_process).pack(pady=15)
-		ttk.Button(self.root, text="Register", command=self.regis_page).pack(pady=15)
+		ttk.Button(self.root, text="Login",style='aw.TButton', command=self.login_process).pack(pady=10)
+		ttk.Button(self.root, text="Register",style='aw.TButton', command=self.regis_page).pack(pady=5)
 
 	def regis_page(self) :
 		self.clear_window()
@@ -35,17 +49,30 @@ class Main :
 		self.root.title("Register Page")
 		self.root.geometry("450x270")
 
-		ttk.Label(self.root, text="Get Your Username Here").pack(pady=5)
+		style = ttk.Style()
+		style.theme_use('clam')
+		style.configure('aw.TButton',font = ('times new roman',15,))
+		style.configure('log.TFrame',background = 'skyblue')
+
+		frame = ttk.Frame(self.root, padding=10,style='log.TFrame')
+		frame.pack(fill='both')
+
+		ttk.Label(frame, text="Get Your Username Here",background='skyblue',font=('times new roman',20, 'bold')).pack(pady=5)
+
+		self.logoLogin = PhotoImage(file= 'Login.png')
+		imageLabel = ttk.Label(image= self.logoLogin)
+		imageLabel.pack(pady=45,anchor='center') 
 		
-		ttk.Label(self.root, text="New Username:").pack(pady=5)
+		ttk.Label(self.root, text="New Username:",font=('times new roman',20, 'bold')).pack(pady=5)
 		self.entry_username = ttk.Entry(self.root)
 		self.entry_username.pack()
 
-		ttk.Label(self.root, text="Password:").pack(pady=5)
+		ttk.Label(self.root, text="Password:",font=('times new roman',20, 'bold')).pack(pady=5)
 		self.entry_password = ttk.Entry(self.root, show="*")
 		self.entry_password.pack()
 
-		ttk.Button(self.root, text="Register", command=self.regis_process).pack(pady=15)
+		ttk.Button(self.root, text="Register",style='aw.TButton', command=self.regis_process).pack(pady=10)
+		ttk.Button(self.root, text="Back",style='aw.TButton', command=self.login_page).pack(pady=5)
 
 	def login_process(self) :
 		username = self.entry_username.get()

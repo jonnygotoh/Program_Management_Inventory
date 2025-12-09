@@ -168,7 +168,7 @@ class Main :
 		self.table.heading("nama_barang",text="NAMA")
 		self.table.heading("status_barang",text="STATUS")
 
-		self.table.column("id_barang",width=60)
+		self.table.column("id_barang",width=60, anchor='center')
 		self.table.column("kode_barang",width=60, anchor="center")
 		self.table.column("nama_barang",width=120, anchor="center")
 		self.table.column("status_barang",width=60, anchor="center")
